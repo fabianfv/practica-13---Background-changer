@@ -1,32 +1,32 @@
-const rojo = [
+const red = [
   'IndianRed', 'LightCoral', 'Salmon', 'DarkSalmon', 'Crimson',
   'Red', 'FireBrick', 'DarkRed'
 ]
 
-const rosa = [
+const pink = [
   "Pink", "LightPink", "HotPink", "DeepPink", "MediumVioletRed",
   "PaleVioletRed"
 ]
 
-const naranja = [
+const orange = [
   "LightSalmon", "Coral", "Tomato", "OrangeRed", "DarkOrange",
   "Orange"
 ]
 
-const amarillo = [
+const yellow = [
   'Gold', 'Yellow', 'LightYellow', 'LemonChiffon',
   'LightGoldenrodYellow', 'PapayaWhip', 'Moccasin', 'PeachPuff',
   'PaleGoldenrod', 'Khaki', 'DarkKhaki'
 ]
 
-const purpura = [
+const purple = [
   'Lavender', 'Thistle', 'Plum', 'Violet', 'Orchid', 'Fuchsia',
   'Magenta', 'MediumOrchid', 'MediumPurple', 'RebeccaPurple',
   'BlueViolet', 'DarkViolet', 'DarkOrchid', 'DarkMagenta',
   'Purple', 'Indigo', 'SlateBlue', 'DarkSlateBlue', 'MediumSlateBlue'
 ]
 
-const verde = [
+const green = [
   'GreenYellow', 'Chartreuse', 'LawnGreen', 'Lime', 'LimeGreen',
   'PaleGreen', 'LightGreen', 'MediumSpringGreen', 'SpringGreen',
   'MediumSeaGreen', 'SeaGreen', 'ForestGreen', 'Green', 'DarkGreen',
@@ -34,34 +34,16 @@ const verde = [
   'MediumAquamarine', 'DarkSeaGreen', 'LightSeaGreen', 'DarkCyan', 'Teal'
 ]
 
-const azul = [
+const blue = [
   'Aqua', 'Cyan', 'LightCyan', 'PaleTurquoise', 'Aquamarine', 'Turquoise',
   'MediumTurquoise', 'DarkTurquoise', 'CadetBlue', 'SteelBlue',
   'LightSteelBlue', 'PowderBlue', 'LightBlue', 'SkyBlue', 'LightSkyBlue',
   'DeepSkyBlue', 'DodgerBlue', 'CornflowerBlue', 'MediumSlateBlue',
   'RoyalBlue', 'Blue', 'MediumBlue', 'DarkBlue', 'Navy', 'MidnightBlue'
 ]
-  
-const marron = [
-  'Cornsilk', 'BlanchedAlmond', 'Bisque', 'NavajoWhite', 'Wheat',
-  'BurlyWood', 'Tan', 'RosyBrown', 'SandyBrown', 'Goldenrod',
-  'DarkGoldenrod', 'Peru', 'Chocolate', 'SaddleBrown', 'Sienna',
-  'Brown', 'Maroon'
-]
 
-const blanco = [
-  'White', 'Snow', 'HoneyDew', 'MintCream', 'Azure', 'AliceBlue',
-  'GhostWhite', 'WhiteSmoke', 'SeaShell', 'Beige', 'OldLace',
-  'FloralWhite', 'Ivory', 'AntiqueWhite', 'Linen', 'LavenderBlush',
-  'MistyRose'
-]
 
-const negro = [
-  'Gainsboro', 'LightGray', 'Silver', 'DarkGray', 'Gray', 'DimGray',
-  'LightSlateGray', 'SlateGray', 'DarkSlateGray', 'Black'
-]
-
-const colores = [rosa, rojo, naranja, amarillo, purpura, verde, azul, marron, blanco, negro]
+const colors = [pink, red, orange, yellow, purple, green, blue]
 
 /**
  * helper function assert
@@ -91,7 +73,7 @@ function randomNumber(min, max) {
 function test_randomNumber() {
   let ok = true
 
-  for (let i = 0; i <= 1000; i++) {
+  for (let i = 0; i <= 100; i++) {
     const rndNum = randomNumber(0, 100)
     ok = rndNum >= 0 && rndNum <= 100 && ok
   }
@@ -101,5 +83,34 @@ function test_randomNumber() {
 
 assert("Testing randomNumber...", true, test_randomNumber())
 
+/**
+ * function coloringDay
+ * 
+ * it just returns a random color from a family color for every day of the week
+ * 
+ */
+
+function coloringDay() { 
+  
+  const familyColorIndex = new Date().getDay() - 1
+
+  const colorsForToday = colors[familyColorIndex]
+
+  const randomIndex = randomNumber(0, colorsForToday.length - 1)
+
+  return colorsForToday[randomIndex]
+}
 
 
+function test_coloringDay() { 
+  
+  let ok = true
+
+  for (let i = 1; i <= 100; i++) {
+    ok = ok && colors[(new Date()).getDay() - 1].includes(coloringDay())
+  }
+
+  return ok
+}
+
+assert("Testing coloringDay() function...", true, test_coloringDay())
