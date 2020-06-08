@@ -114,3 +114,19 @@ function test_coloringDay() {
 }
 
 assert("Testing coloringDay() function...", true, test_coloringDay())
+
+
+/**
+ * function setBackgroundColor
+ * 
+ * it just set the specified color as background on the specified container
+ * 
+ */
+
+function setBackgroundColor(color, container) { 
+  container.style.backgroundColor = color
+}
+
+const body = document.getElementsByTagName("body")[0]
+
+setBackgroundColor(coloringDay(), body)
