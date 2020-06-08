@@ -63,5 +63,43 @@ const negro = [
 
 const colores = [rosa, rojo, naranja, amarillo, purpura, verde, azul, marron, blanco, negro]
 
+/**
+ * helper function assert
+ * 
+ * @param {string} message: it says me if the test was succssesful or not
+ * @param {any} expected: it's the expected value from the method or function under test
+ * @param {any} returned: it's the real value returned by the method or function under test
+ * 
+ * it helps me to tests my methods and functions
+ */
+
+function assert(message, expected, returned) { 
+  console.log(message, expected === returned ? "Alright" : "Something bad is coming!!!" )
+}
+
+/**
+ * function randomNumber
+ * 
+ * it just returns a random number between min and max
+ * 
+ */
+
+function randomNumber(min, max) {
+  return Math.round(Math.random() * (max - min) + min)
+}
+
+function test_randomNumber() {
+  let ok = true
+
+  for (let i = 0; i <= 1000; i++) {
+    const rndNum = randomNumber(0, 100)
+    ok = rndNum >= 0 && rndNum <= 100 && ok
+  }
+
+  return ok
+}
+
+assert("Testing randomNumber...", true, test_randomNumber())
+
 
 
