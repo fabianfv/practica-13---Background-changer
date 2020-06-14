@@ -1,32 +1,40 @@
-const red = [
+const redFamily = 0,
+  pinkFamily = 1,
+  orangeFamily = 2,
+  yellowFamily = 3,
+  purpleFamily = 4,
+  greenFamily = 5,
+  blueFamily = 6
+
+const redColors = [
   'IndianRed', 'LightCoral', 'Salmon', 'DarkSalmon', 'Crimson',
   'Red', 'FireBrick', 'DarkRed'
 ]
 
-const pink = [
+const pinkColors = [
   "Pink", "LightPink", "HotPink", "DeepPink", "MediumVioletRed",
   "PaleVioletRed"
 ]
 
-const orange = [
+const orangeColors = [
   "LightSalmon", "Coral", "Tomato", "OrangeRed", "DarkOrange",
   "Orange"
 ]
 
-const yellow = [
+const yellowColors = [
   'Gold', 'Yellow', 'LightYellow', 'LemonChiffon',
   'LightGoldenrodYellow', 'PapayaWhip', 'Moccasin', 'PeachPuff',
   'PaleGoldenrod', 'Khaki', 'DarkKhaki'
 ]
 
-const purple = [
+const purpleColors = [
   'Lavender', 'Thistle', 'Plum', 'Violet', 'Orchid', 'Fuchsia',
   'Magenta', 'MediumOrchid', 'MediumPurple', 'RebeccaPurple',
   'BlueViolet', 'DarkViolet', 'DarkOrchid', 'DarkMagenta',
   'Purple', 'Indigo', 'SlateBlue', 'DarkSlateBlue', 'MediumSlateBlue'
 ]
 
-const green = [
+const greenColors = [
   'GreenYellow', 'Chartreuse', 'LawnGreen', 'Lime', 'LimeGreen',
   'PaleGreen', 'LightGreen', 'MediumSpringGreen', 'SpringGreen',
   'MediumSeaGreen', 'SeaGreen', 'ForestGreen', 'Green', 'DarkGreen',
@@ -34,7 +42,7 @@ const green = [
   'MediumAquamarine', 'DarkSeaGreen', 'LightSeaGreen', 'DarkCyan', 'Teal'
 ]
 
-const blue = [
+const blueColors = [
   'Aqua', 'Cyan', 'LightCyan', 'PaleTurquoise', 'Aquamarine', 'Turquoise',
   'MediumTurquoise', 'DarkTurquoise', 'CadetBlue', 'SteelBlue',
   'LightSteelBlue', 'PowderBlue', 'LightBlue', 'SkyBlue', 'LightSkyBlue',
@@ -43,7 +51,8 @@ const blue = [
 ]
 
 
-const colors = [pink, red, orange, yellow, purple, green, blue]
+
+const colors = [pinkColors, redColors, orangeColors, yellowColors, purpleColors, greenColors, blueColors]
 
 /**
  * helper function assert
@@ -91,8 +100,8 @@ assert("Testing randomNumber...", true, test_randomNumber())
  */
 
 function coloringDay() { 
-  
-  const familyColorIndex = new Date().getDay() - 1
+
+  const familyColorIndex = new Date().getDay()
 
   const colorsForToday = colors[familyColorIndex]
 
@@ -102,12 +111,41 @@ function coloringDay() {
 }
 
 
-function test_coloringDay() { 
+function mockColoringDay() { 
+  familyColors = [ redFamily, pinkFamily, orangeFamily, yellowFamily, purpleFamily, greenFamily, blueFamily ]
+
+  /*
+  * Descomentar la familia de colores que se quiera probar
+  * y actualizar varias veces el navegador
+  */
+  
+  //familyColorIndex = redFamily
+  familyColorIndex = blueFamily
+  //familyColorIndex = pinkFamily
+  //familyColorIndex = greenFamily
+  //familyColorIndex = orangeFamily
+  //familyColorIndex = purpleFamily
+  //familyColorIndex = yellowFamily
+
+  const colorsForToday = colors[familyColorIndex]
+
+  const randomIndex = randomNumber(0, colorsForToday.length - 1)
+  console.log("randomIndex: ", randomIndex)
+  return colorsForToday[randomIndex]
+}
+
+/**
+ * I'm testing that the array colors at index aDayNumber contains the color for today
+ */
+function test_coloringDay() {
   
   let ok = true
 
   for (let i = 1; i <= 100; i++) {
-    ok = ok && colors[(new Date()).getDay() - 1].includes(coloringDay())
+    const aDayNumber = new Date().getDay()
+    const aColor = coloringDay()
+    ok = ok && colors[aDayNumber].includes(aColor)    
+    //ok = ok && colors[(new Date()).getDay()].includes(coloringDay())
   }
 
   return ok
@@ -130,3 +168,10 @@ function setBackgroundColor(color, container) {
 const body = document.getElementsByTagName("body")[0]
 
 setBackgroundColor(coloringDay(), body)
+
+/* 
+* Descomentar la línea siguiente para un test rápido de las diferentes
+* familias de colores, luego ver la función mockColoringDay().
+*/
+//setBackgroundColor(mockColoringDay(), body)
+
